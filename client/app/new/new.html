@@ -4,7 +4,14 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Create a new poll</h1>
-      
+      <form class="poll-editor" ng-submit="addPoll()" name="pollEditor">
+          <input type="text" class="form-control" ng-model="pollName" placeholder="Poll Name" required />
+          <fieldset ng-repeat="answer in answers">
+              <input type="text" class="form-control" ng-model="answer.name" placeholder="Answer" name="" />
+          </fieldset>
+          <button ng-click="addAnswer()">Add answer</button>
+          <input class="btn btn-primary" type="submit" ng-disabled="pollEditor.$invalid" value="Submit">
+      </form>
     </div>
   </div>
 </div>
