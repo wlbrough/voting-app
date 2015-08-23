@@ -8,10 +8,23 @@ angular.module('workspaceApp')
     $scope.addAnswer = function() {
       var nextAnswerNo = $scope.answers.length + 1;
       $scope.answers.push({ 'id': 'answer' + nextAnswerNo});
-    }
+    };
     
     $scope.removeAnswer = function() {
       // Still needs to be implemented
+    };
+    
+    $scope.addPoll = function() {
+      $scope.pollNameInvalid = false;
+      
+      if (!$scope.pollEditor.name.$valid) {
+        $scope.pollNameInvalid = true;
+      }
+      
+      if ($scope.pollEditor.$valid) {
+        
+      }
+    
     }
     
   });
