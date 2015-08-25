@@ -5,6 +5,7 @@ angular.module('workspaceApp')
     $routeProvider
       .when('/new', {
         templateUrl: 'app/new/new.html',
-        controller: 'NewCtrl'
+        controller: 'NewCtrl',
+        authenticate: true
       });
   });

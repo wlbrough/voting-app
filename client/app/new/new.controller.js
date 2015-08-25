@@ -1,13 +1,12 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('NewCtrl', function ($scope, $http) {
+  .controller('NewCtrl', function ($scope, Auth, $http) {
     $scope.poll = {};
-    $scope.answers = [{ id: "answer1" }, { id: "answer2" }];
+    $scope.poll.answers = [{ text: '', votes: 0 }, { text: '', votes: 0 }];
     
     $scope.addAnswer = function() {
-      var nextAnswerNo = $scope.answers.length + 1;
-      $scope.answers.push({ 'id': 'answer' + nextAnswerNo});
+      $scope.poll.answers.push({ text: '', votes: 0 });
     };
     
     $scope.removeAnswer = function() {
