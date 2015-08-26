@@ -42,6 +42,10 @@ angular.module('workspaceApp', [
       }
     };
   })
+  
+  .factory('Poll', function($resource) {
+    return $resource('/api/polls/:id');
+  })
 
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in

@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('NewCtrl', function ($scope, Auth, $http) {
+  .controller('NewCtrl', function ($scope, Auth, Poll) {
     $scope.poll = {};
-    $scope.poll.answers = [{ text: '', votes: 0 }, { text: '', votes: 0 }];
+    $scope.poll.answers = [{ text: '' }, { text: '' }];
     
     $scope.addAnswer = function() {
-      $scope.poll.answers.push({ text: '', votes: 0 });
+      $scope.poll.answers.push({ text: '' });
     };
     
     $scope.removeAnswer = function() {
@@ -21,7 +21,10 @@ angular.module('workspaceApp')
       }
       
       if ($scope.pollEditor.$valid) {
-        
+        $scope.poll.answers = $scope.poll.answers.filter(function(answer) {
+          return answer.text.length > 0;
+        });
+        Poll.save($scope.poll);
       }
     
     }
