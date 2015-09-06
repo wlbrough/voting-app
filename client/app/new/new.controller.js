@@ -10,17 +10,12 @@ angular.module('workspaceApp')
     };
     
     $scope.removeAnswer = function() {
-      // Still needs to be implemented
+      $scope.poll.answers.pop();
     };
     
-    $scope.addPoll = function() {
-      $scope.pollNameInvalid = false;
+    $scope.addPoll = function(formValid) {
       
-      if (!$scope.pollEditor.name.$valid) {
-        $scope.pollNameInvalid = true;
-      }
-      
-      if ($scope.pollEditor.$valid) {
+      if (formValid) {
         $scope.poll.answers = $scope.poll.answers.filter(function(answer) {
           return answer.text.length > 0;
         });
