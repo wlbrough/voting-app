@@ -44,7 +44,11 @@ angular.module('workspaceApp', [
   })
   
   .factory('Poll', function($resource) {
-    return $resource('/api/polls/:id');
+    return $resource('/api/polls/:id', { id: '@_id' }, {
+      update: {
+        method: 'PUT'
+      }
+    });
   })
 
   .run(function ($rootScope, $location, Auth) {

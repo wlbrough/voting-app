@@ -10,8 +10,7 @@ var PollSchema = new Schema({
     required: 'Poll Name cannot be blank'
   },
   owner: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
+    type: String,
   },
   created: {
     type: Date,
