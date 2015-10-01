@@ -12,12 +12,17 @@ var mongoose = require('mongoose');
 var config = require('./config/environment');
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
-mongoose.connection.on('error', function(err) {
-	console.error('MongoDB connection error: ' + err);
-	process.exit(-1);
-	}
-);
+if (process.env.NODE_ENV == 'test') {
+	var mockgoose = require('mockgoose')(mongoose);
+	mongoose.connect(config.mongo.uri);
+} else {
+	mongoose.connect(config.mongo.uri, config.mongo.options);
+	mongoose.connection.on('error', function(err) {
+		console.error('MongoDB connection error: ' + err);
+		process.exit(-1);
+		}
+	);
+}
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
 

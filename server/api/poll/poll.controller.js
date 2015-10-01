@@ -5,21 +5,18 @@ var Poll = require('./poll.model');
 
 // Get list of polls
 exports.index = function(req, res) {
-  Poll.find(function (err, polls) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(polls);
-  });
-};
-
-// Get list of polls for user
-exports.user = function(req, res) {
-  if (req.params.userId) {
-    Poll.find({})
-      .where('owner').equals(req.params.userId)
-      .exec(function(err, polls) {
-        if (err) { return handleError(res, err); }
-        return res.status(200).json(polls);
-      });
+  if (req.query.user) {
+    Poll.find({
+      owner: req.query.user
+    }).exec(function(err, polls) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(polls);
+    });
+  } else {
+    Poll.find(function (err, polls) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(polls);
+    });
   }
 };
 
