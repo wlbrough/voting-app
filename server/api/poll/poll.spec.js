@@ -7,6 +7,21 @@ var request = require('supertest')(app);
 describe('rest api for polls', function() {
   var id;
   var user = 'ed881f991c116c18f2d6aaa3';
+  var Cookies;
+  
+  before(function(done) {
+    request.post('/auth/local')
+      .send({
+        email: 'nikola@tesla.com',
+        password: 'wireless'
+      })
+      .end(function(e, res) {
+        if (e) throw e;
+        should(res.status).equal(200);
+        Cookies = {access_token: res.body.token};
+        done();
+      });
+  });
   
   it('posts an object', function(done) {
     request.post('/api/polls')
@@ -14,6 +29,7 @@ describe('rest api for polls', function() {
         name: 'Who is your favorite Harry Potter character?',
         answers: [{text: 'Harry'}, {text: 'Ron'}, {text: 'Hermione'}]
       })
+      .query(Cookies)
       .end(function(e, res) {
         should(e).equal(null);
         // should(res.body.length).equal(1);
@@ -59,6 +75,7 @@ describe('rest api for polls', function() {
         name: 'Who is your least favorite Harry Potter character?',
         answers: [{text: 'Harry'}, {text: 'Ron'}, {text: 'Hermione'}]
       })
+      .query(Cookies)
       .end(function(e, res) {
         should(e).equal(null);
         should(typeof res.body).equal('object');
@@ -81,6 +98,7 @@ describe('rest api for polls', function() {
   
   it('removes an object', function(done) {
     request.del('/api/polls/'+id)
+      .query(Cookies)
       .end(function(e, res) {
         should(e).equal(null);
         should(typeof res.body).equal('object');

@@ -34,6 +34,11 @@ User.find({}).remove(function() {
     password: 'test'
   }, {
     provider: 'local',
+    name: 'Nikola Tesla',
+    email: 'nikola@tesla.com',
+    password: 'wireless'
+  }, {
+    provider: 'local',
     role: 'admin',
     name: 'Admin',
     email: 'admin@admin.com',
