@@ -23,6 +23,8 @@ Poll.find({}).remove(function() {
   },  {
     name : 'What is your favorite person?',
     answers : [{text: 'Ghandi'}, {text: 'Mother Theresa'}, {text: 'Kanye West'}]
+  }, function() {
+    console.log('finished populating polls');
   });
 });
 
